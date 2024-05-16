@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import '../src/assets/css/styles.css';
+import "@fontsource/montserrat"
+import '@fontsource/montserrat/700.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { 
+  ChakraProvider,
+  extendBaseTheme,
+  theme as chakraTheme,
+  Link as ChakraLink
+ } from '@chakra-ui/react'
+import theme from './theme'
+import Home from './pages/Home';
+import Header from './components/Header';
+import { DataProvider } from './context/DataProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataProvider>
+      <ChakraProvider theme={theme}>
+        <Router>
+          <Header />
+          <Routes>
+                <Route exact path="/" element={<Home  />} />
+                {/* <Route exact path="/details" element={<Details />} /> */}
+          </Routes>
+          {/* <Footer /> */}
+        </Router>
+      </ChakraProvider>
+    </DataProvider>  
   );
 }
 
