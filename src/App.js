@@ -13,6 +13,7 @@ import theme from './theme'
 import Home from './pages/Home';
 import Header from './components/Header';
 import { DataProvider } from './context/DataProvider';
+import Detail from './pages/Detail';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Header />
           <Routes>
                 <Route exact path="/" element={<Home  />} />
-                {/* <Route exact path="/details" element={<Details />} /> */}
+                <Route exact path="/details" element={<Detail />} />
           </Routes>
           {/* <Footer /> */}
         </Router>
