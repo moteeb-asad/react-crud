@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from "react";
 
 const DataContext = createContext();
 
@@ -8,10 +8,10 @@ const DataProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const db = await new Promise((resolve, reject) => {
-        const request = indexedDB.open('crudDB', 1);
+        const request = indexedDB.open("crudDB", 1);
 
         request.onerror = (event) => {
-          console.error('Database error:', event.target.errorCode);
+          console.error("Database error:", event.target.errorCode);
           reject(event.target.errorCode);
         };
 
@@ -22,15 +22,18 @@ const DataProvider = ({ children }) => {
 
         request.onupgradeneeded = (event) => {
           const db = event.target.result;
-          const objectStore = db.createObjectStore('records', { keyPath: 'id', autoIncrement: true });
-          objectStore.createIndex('title', 'title', { unique: false });
-          objectStore.createIndex('upvotes', 'upvotes', { unique: false });
-          objectStore.createIndex('date', 'date', { unique: false });
+          const objectStore = db.createObjectStore("records", {
+            keyPath: "id",
+            autoIncrement: true,
+          });
+          objectStore.createIndex("title", "title", { unique: false });
+          objectStore.createIndex("upvotes", "upvotes", { unique: false });
+          objectStore.createIndex("date", "date", { unique: false });
         };
       });
 
-      const transaction = db.transaction('records', 'readonly');
-      const objectStore = transaction.objectStore('records');
+      const transaction = db.transaction("records", "readonly");
+      const objectStore = transaction.objectStore("records");
       const allRecords = await objectStore.getAll();
       setData(allRecords);
     };
@@ -39,7 +42,7 @@ const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ data, setData:setData }}>
+    <DataContext.Provider value={{ data, setData: setData }}>
       {children}
     </DataContext.Provider>
   );
