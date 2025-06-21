@@ -6,7 +6,7 @@ export const ROUTES = {
 
 // Application Configuration
 export const APP_CONFIG = {
-  APP_NAME: "",
+  APP_NAME: "React CRUD",
   DEFAULT_PAGE_SIZE: 10,
   MAX_RECORDS: 100,
 };
